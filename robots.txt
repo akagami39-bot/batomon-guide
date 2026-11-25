@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://akagami39-bot.github.io/batomon-guide/sitemap.xml
