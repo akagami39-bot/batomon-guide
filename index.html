@@ -216,9 +216,12 @@
   .formarrow{text-align:center;font-size:1.25rem;font-weight:900;color:var(--accent);line-height:1;margin:.9rem 0 -.55rem;}
 
   /* ===== tabs ===== */
-  nav.tabs{position:sticky;top:0;z-index:40;background:var(--bg2);border-bottom:3px solid var(--line2);padding:.55rem 1rem;}
-  .tabs-in{max-width:72rem;margin:0 auto;display:flex;gap:.5rem;}
-  .tabbtn{flex:1;font-family:"DotGothic16",sans-serif;font-size:1.05rem;background:var(--card);border:2px solid var(--line2);border-radius:8px;padding:.5rem .4rem;color:var(--ink);box-shadow:var(--shadow);}
+  nav.tabs{position:sticky;top:0;z-index:40;background:var(--bg2);border-bottom:3px solid var(--line2);padding:.55rem .75rem;}
+  .tabs-in{max-width:72rem;margin:0 auto;display:flex;gap:.45rem;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--line2) transparent;padding-bottom:.25rem;}
+  .tabs-in::-webkit-scrollbar{height:6px;}
+  .tabs-in::-webkit-scrollbar-thumb{background:var(--line2);border-radius:999px;}
+  .tabs-in::-webkit-scrollbar-track{background:transparent;}
+  .tabbtn{flex:0 0 auto;white-space:nowrap;font-family:"DotGothic16",sans-serif;font-size:1rem;background:var(--card);border:2px solid var(--line2);border-radius:8px;padding:.5rem .8rem;color:var(--ink);box-shadow:var(--shadow);}
   .tabbtn[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff;}
   .tabpage[hidden]{display:none;}
   .pagewrap{max-width:72rem;margin:0 auto;padding:0 1rem 2rem;}
@@ -388,7 +391,7 @@
   .wrrow .wobs{flex-basis:100%;font-size:.7rem;font-weight:700;color:var(--ink2);}
   .caution{background:var(--card);border:2px dashed var(--line2);border-radius:10px;padding:.7rem .95rem;font-size:.84rem;font-weight:700;margin-top:.8rem;}
   .caution b{color:var(--accent);}
-  @media (max-width:480px){ .tabbtn{font-size:.92rem;padding:.5rem .2rem;} .wrrow .wn{min-width:6.8rem;} }
+  @media (max-width:480px){ .tabbtn{font-size:.92rem;padding:.5rem .65rem;} .wrrow .wn{min-width:6.8rem;} }
 
   /* ===== stats in modal & cards ===== */
   .statline{font-size:.68rem;font-weight:900;color:var(--ink2);line-height:1.5;margin-top:.25rem;}
@@ -438,9 +441,7 @@
   .tk-price{font-size:.74rem;font-weight:900;color:var(--ink2);margin-top:.3rem;}
   .tk-price b{color:var(--accent);font-size:.9rem;}
   .tk-note{font-size:.68rem;line-height:1.5;color:var(--ink2);font-weight:700;margin-top:.35rem;text-align:left;width:100%;border-top:1.5px dashed var(--line);padding-top:.3rem;}
-  .tabs-in{flex-wrap:wrap;}
-  .tabbtn{flex:1 1 30%;}
-  @media (min-width:640px){ .tabbtn{flex:1 1 0;} }
+  /* タブが増えたため折り返さず1列の横スクロールにする（上の .tabs-in 定義が正本） */
   /* ===== glossary ===== */
   a.glink{color:inherit;text-decoration:underline dotted;text-decoration-thickness:1px;text-underline-offset:3px;cursor:pointer;}
   a.glink:hover{text-decoration-style:solid;}
@@ -684,10 +685,7 @@
   .dl-btn:focus-visible{outline:3px solid var(--ink);outline-offset:2px;}
   .dl-note{margin-top:1.15rem;font-size:.84rem;font-weight:700;color:var(--ink2);}
 
-  /* ===== ツールタブ（効果の逆引き検索／比較／CD早見表・計算機／調整ライン） ===== */
-  .tl-subnav{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:1rem;}
-  .tl-subnav a{text-decoration:none;border:2px solid var(--line2);background:var(--card);color:var(--ink);border-radius:999px;padding:.3rem .9rem;font-weight:900;font-size:.85rem;box-shadow:var(--shadow);}
-  .tl-subnav a:hover{border-color:var(--accent);}
+  /* ===== 独立タブ群（逆引き検索／比較／CD計算／調整ライン／相性探索） ===== */
   .tl-sec{scroll-margin-top:8.5rem;}
   .tl-panel{background:var(--card);border:2px solid var(--line2);border-radius:10px;box-shadow:var(--shadow);padding:.85rem .95rem;margin-top:.9rem;}
   .tl-panel h3{font-family:"DotGothic16",sans-serif;font-size:1.15rem;margin:0 0 .45rem;line-height:1.35;}
@@ -818,7 +816,11 @@
     <button class="tabbtn" role="tab" id="tabbtn-trainers" aria-selected="false" aria-controls="page-trainers" data-tab="trainers">トレーナー</button>
     <button class="tabbtn" role="tab" id="tabbtn-comps" aria-selected="false" aria-controls="page-comps" data-tab="comps">編成</button>
     <button class="tabbtn" role="tab" id="tabbtn-builder" aria-selected="false" aria-controls="page-builder" data-tab="builder">編成ビルダー</button>
-    <button class="tabbtn" role="tab" id="tabbtn-tools" aria-selected="false" aria-controls="page-tools" data-tab="tools">ツール</button>
+    <button class="tabbtn" role="tab" id="tabbtn-fx" aria-selected="false" aria-controls="page-fx" data-tab="fx">逆引き検索</button>
+    <button class="tabbtn" role="tab" id="tabbtn-cmp" aria-selected="false" aria-controls="page-cmp" data-tab="cmp">比較</button>
+    <button class="tabbtn" role="tab" id="tabbtn-cd" aria-selected="false" aria-controls="page-cd" data-tab="cd">CD計算</button>
+    <button class="tabbtn" role="tab" id="tabbtn-bp" aria-selected="false" aria-controls="page-bp" data-tab="bp">調整ライン</button>
+    <button class="tabbtn" role="tab" id="tabbtn-pair" aria-selected="false" aria-controls="page-pair" data-tab="pair">相性探索</button>
     <button class="tabbtn" role="tab" id="tabbtn-tiers" aria-selected="false" aria-controls="page-tiers" data-tab="tiers">ティア表</button>
     <button class="tabbtn" role="tab" id="tabbtn-trinkets" aria-selected="false" aria-controls="page-trinkets" data-tab="trinkets">トリンケット</button>
     <button class="tabbtn" role="tab" id="tabbtn-items" aria-selected="false" aria-controls="page-items" data-tab="items">アイテム</button>
@@ -924,7 +926,7 @@
       <button type="button" class="tfbtn tf-all" data-type="all" aria-pressed="true">すべて</button>
     </div>
   </div>
-  <div class="datanote" style="margin-top:1rem;">バトモンの<b>タイプ・価格・レベル別ステータス（通常／シャイニー）と効果文</b>を掲載した。効果文は全144体すべて実機（日本語版）で確認した<b>公式日本語</b>。数値は英語版データ（batomon.com／Balance 28、2026年11月26日取得）による。カードを選ぶと詳細が見られる。カードと詳細の<b>ティアバッジは Balance 28 のティア</b>で、前回（Balance 27）から変わったものは「前回→現行」を併記し、現行がデータ不足のものは前回ティアを「前回」バッジ（薄い色）で参照表示する（現行データではない）。進化ラインのカードは最終進化形のティアで判定する。効果の言葉から探したいときは<a href="#tl-fx" id="dexToFx">ツールタブの「効果の逆引き検索」</a>が使える。</div>
+  <div class="datanote" style="margin-top:1rem;">バトモンの<b>タイプ・価格・レベル別ステータス（通常／シャイニー）と効果文</b>を掲載した。効果文は全144体すべて実機（日本語版）で確認した<b>公式日本語</b>。数値は英語版データ（batomon.com／Balance 28、2026年11月26日取得）による。カードを選ぶと詳細が見られる。カードと詳細の<b>ティアバッジは Balance 28 のティア</b>で、前回（Balance 27）から変わったものは「前回→現行」を併記し、現行がデータ不足のものは前回ティアを「前回」バッジ（薄い色）で参照表示する（現行データではない）。進化ラインのカードは最終進化形のティアで判定する。効果の言葉から探したいときは<a href="#tl-fx" id="dexToFx">「逆引き検索」タブ</a>が使える。</div>
   <nav class="rarity-nav" id="rarityNav" aria-label="レアリティへジャンプ"></nav>
   <div id="grid"></div>
   <p class="empty" id="emptyMsg">条件に合うバトモンが見つからなかった。検索や絞り込みを変えてみて。</p>
@@ -1117,17 +1119,9 @@
   </div>
 </div>
 
-<div class="tabpage" id="page-tools" role="tabpanel" aria-labelledby="tabbtn-tools" hidden>
+<div class="tabpage" id="page-fx" role="tabpanel" aria-labelledby="tabbtn-fx" hidden>
   <div class="pagewrap">
-    <div class="datanote">図鑑のデータを別の切り口で使う<b>ツール集</b>。効果の言葉からバトモンを探す<b>逆引き検索</b>、2〜3体を並べる<b>比較</b>、クールダウンの<b>早見表と計算機</b>、CD速度の<b>調整ライン表</b>の4つ。数値・効果文は図鑑タブと同じデータ（公式日本語の効果文／batomon.com・Balance 28 の数値）を使う。</div>
-    <nav class="tl-subnav" aria-label="ツール内の移動">
-      <a href="#tl-fx">効果の逆引き検索</a>
-      <a href="#tl-cmp">バトモン比較</a>
-      <a href="#tl-cd">CD早見表・計算機</a>
-      <a href="#tl-bp">調整ライン表</a>
-      <a href="#tl-pair">ペア・コア相性探索</a>
-    </nav>
-
+    <div class="datanote">効果の言葉や仕組みからバトモンを探す<b>逆引き検索</b>。数値・効果文は図鑑タブと同じデータ（公式日本語の効果文／batomon.com・Balance 28 の数値）を使う。</div>
     <section class="tl-sec" id="tl-fx" aria-label="効果の逆引き検索">
       <h2 class="hist-sec">効果の逆引き検索</h2>
       <p class="hist-lead">「隣接する味方を育てたい」「ポイズンを与えた時に反応する子が欲しい」のように、<b>効果の言葉や仕組み</b>からバトモンを探せる。名前が分からなくても目的からたどれる。チップは複数選べて、選んだ条件<b>すべて</b>に当てはまるバトモンだけが出る（もう一度押すと解除）。自由入力は効果文・トリガー・ステータス名・名前を横断して探す。</p>
@@ -1146,7 +1140,12 @@
       <div id="fxGrid"></div>
       <p class="empty" id="fxEmpty">条件に合うバトモンが見つからなかった。チップを減らすか、言葉を変えてみて。</p>
     </section>
+  </div>
+</div>
 
+<div class="tabpage" id="page-cmp" role="tabpanel" aria-labelledby="tabbtn-cmp" hidden>
+  <div class="pagewrap">
+    <div class="datanote">2〜3体を並べて比べる<b>バトモン比較</b>。数値・効果文は図鑑タブと同じデータ（公式日本語の効果文／batomon.com・Balance 28 の数値）を使う。</div>
     <section class="tl-sec" id="tl-cmp" aria-label="バトモン比較">
       <h2 class="hist-sec">バトモン比較</h2>
       <p class="hist-lead">2〜3体を選ぶと、価格・タイプ・CD・レベル別の数値・効果文を1枚の表に並べる。数値の行は<b>一番良い値に色</b>が付く（CDは短い方、数値・発動回数は大きい方）。進化ラインのバトモンは、選んだあとに<b>形態ボタン</b>で進化前／進化形を切り替えて比べられる。</p>
@@ -1154,10 +1153,16 @@
       <div class="cmp-tablewrap" id="cmpWrap"></div>
       <p class="tl-note">色の見方：<b>緑のセル＝その行で一番良い値</b>。同点の場合は全員に色が付く。価格は安い方が良いとは限らないため色は付けず、参考として並べている。ティア・勝率はティア表（Balance 28／全地方合算）と同じ値。</p>
     </section>
+  </div>
+</div>
 
+<div class="tabpage" id="page-cd" role="tabpanel" aria-labelledby="tabbtn-cd" hidden>
+  <div class="pagewrap">
+    <div class="datanote">クールダウンの<b>早見表と計算機</b>。数値・効果文は図鑑タブと同じデータ（公式日本語の効果文／batomon.com・Balance 28 の数値）を使う。選んだバトモンは<b>調整ライン</b>タブにも引き継がれる。</div>
+    <p class="tl-note" style="margin-top:.7rem;">選んだバトモン・形態・レベル・CD速度は<b>調整ライン</b>タブと連動している。<button type="button" class="chip" data-goto-tab="bp" style="margin-left:.4rem;">調整ラインを見る →</button></p>
     <section class="tl-sec" id="tl-cd" aria-label="クールダウン早見表と計算機">
       <h2 class="hist-sec">クールダウン早見表</h2>
-      <p class="hist-lead">全144体の<b>実効クールダウン（＝初回発動までの秒数）</b>を、レベルと通常／シャイニー別に並べた早見表。CD速度0%のときの値で、初回発動はこの秒数ちょうどに来る。行を選ぶと下の計算機と調整ライン表にそのバトモンが入る。</p>
+      <p class="hist-lead">全144体の<b>実効クールダウン（＝初回発動までの秒数）</b>を、レベルと通常／シャイニー別に並べた早見表。CD速度0%のときの値で、初回発動はこの秒数ちょうどに来る。行を選ぶと下の計算機にそのバトモンが入り、<b>調整ライン</b>タブにも同じバトモンが引き継がれる。</p>
       <div class="tl-controls">
         <label class="searchbox" style="flex:1 1 12rem;">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
@@ -1230,10 +1235,16 @@
         <p class="tl-note">計算式は BatoForge のクールダウン計算機が公開している式：<b>実効CD ＝ 最大（0.1秒, 0.1秒単位に丸めた（基本CD ÷ 最大（0.1, 1 ＋ CD速度）））</b>。CD速度は%表記（+50%なら ÷1.5）で計算する。発動回数は「実効CD × 回数 ≦ 30秒」で数え、初回発動は実効CDちょうどのタイミング。マルチキャストやチャージ、トリガーによる追加発動は含まない。出典：<a href="https://batoforge.com/cooldown-calculator" target="_blank" rel="noopener">BatoForge Cooldown Calculator</a></p>
       </div>
     </section>
+  </div>
+</div>
 
+<div class="tabpage" id="page-bp" role="tabpanel" aria-labelledby="tabbtn-bp" hidden>
+  <div class="pagewrap">
+    <div class="datanote">CD速度の<b>調整ライン表</b>。<b>CD計算</b>タブで選んだバトモン・形態・レベル・CD速度がそのまま引き継がれる。数値は図鑑タブと同じデータ（batomon.com・Balance 28）を使う。</div>
+    <p class="tl-note" style="margin-top:.7rem;">この表は<b>CD計算</b>タブの計算機と連動している。バトモンやCD速度を変えたいときはそちらで選ぶ。<button type="button" class="chip" data-goto-tab="cd" style="margin-left:.4rem;">CD計算へ戻る →</button></p>
     <section class="tl-sec" id="tl-bp" aria-label="調整ライン表">
       <h2 class="hist-sec">調整ライン表</h2>
-      <p class="hist-lead">「ここまでCD速度を盛ると挙動が変わる」という<b>基準値の一覧</b>。上の計算機で選んだバトモン・形態・レベルと連動していて、発動回数が増える境目（ライン）を全部並べる。今のCD速度で届いているラインには色が付く。</p>
+      <p class="hist-lead">「ここまでCD速度を盛ると挙動が変わる」という<b>基準値の一覧</b>。<b>CD計算</b>タブの計算機で選んだバトモン・形態・レベルと連動していて、発動回数が増える境目（ライン）を全部並べる。今のCD速度で届いているラインには色が付く。</p>
       <div class="tl-panel">
         <h3 id="bpTitle">調整ライン</h3>
         <p class="tl-note" id="bpLead" style="margin-top:0;"></p>
@@ -1244,7 +1255,12 @@
         <p class="tl-note">ラインは CD速度 +200% まで（または発動30回まで）を表示。CD速度はトリンケットや効果で盛る前提の理論値で、実際にその値まで盛れるかは編成・所持トリンケットによる。計算式は計算機と同じ（BatoForge公開式）。ダメージや耐久のラインは、バトルの計算式が公開されていないため載せていない。</p>
       </div>
     </section>
+  </div>
+</div>
 
+<div class="tabpage" id="page-pair" role="tabpanel" aria-labelledby="tabbtn-pair" hidden>
+  <div class="pagewrap">
+    <div class="datanote">核になる組み合わせから探す<b>ペア・コア相性探索</b>。編成統計と図鑑の効果文は、編成タブ・図鑑タブと同じデータを使う。</div>
     <section class="tl-sec" id="tl-pair" aria-label="ペア・コア相性探索">
       <h2 class="hist-sec">ペア・コア相性探索</h2>
       <p class="hist-lead">6体の完成形ではなく、<b>核になる組み合わせ（2体のペア／3体・4体のコア）</b>から探すための道具。編成統計から数えたものには<span class="rb-lab data">データ</span>、効果文の噛み合いから機械的に判定したものには<span class="rb-lab guide">シナジー（目安）</span>の印を付けた。<b>「シナジー（目安）」は実測の相性データではなく</b>、図鑑の効果文（状態の付与と反応・タイプ強化）から判定した編集版。</p>
@@ -2140,10 +2156,19 @@ var TIER_ORDER = {"S":0,"A":1,"B":2,"C":3,"D":4,"E":5};
 
 /* tabs */
 function showTab(name){
-  ["dex","howto","trainers","comps","builder","tools","tiers","trinkets","items","events","glossary","history","download","board","contact"].forEach(function(t){
-    document.getElementById('page-'+t).hidden = (t!==name);
-    document.getElementById('tabbtn-'+t).setAttribute('aria-selected', t===name ? 'true':'false');
+  ["dex","howto","trainers","comps","builder","fx","cmp","cd","bp","pair","tiers","trinkets","items","events","glossary","history","download","board","contact"].forEach(function(t){
+    var pg = document.getElementById('page-'+t);
+    var btn = document.getElementById('tabbtn-'+t);
+    if(pg) pg.hidden = (t!==name);
+    if(btn) btn.setAttribute('aria-selected', t===name ? 'true':'false');
   });
+  /* 選択したタブが横スクロール範囲の外にある場合は、タブバー内だけをスクロールして見える位置へ寄せる */
+  var activeBtn = document.getElementById('tabbtn-'+name);
+  if(activeBtn && activeBtn.parentElement){
+    var bar = activeBtn.parentElement;
+    var target = activeBtn.offsetLeft - (bar.clientWidth - activeBtn.offsetWidth) / 2;
+    bar.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
+  }
   window.scrollTo({top:0});
 }
 document.querySelectorAll('.tabbtn').forEach(function(b){
@@ -4286,7 +4311,7 @@ document.querySelectorAll('#bdRarityChips .chip, #bdRarityChipsPg .chip').forEac
     });
   });
 })();
-/* ===== ツールタブ：効果の逆引き検索／バトモン比較／CD早見表・計算機／調整ライン表 =====
+/* ===== 独立タブ群：逆引き検索／比較／CD計算／調整ライン／相性探索（旧ツールタブを分割） =====
    すべて図鑑と同じ DATA（公式日本語の効果文＋Balance 28 の数値）からその場で計算する。 */
 /* --- 共通ヘルパー --- */
 function tlForm(d, formKey){ return d && d.st ? d.st[formKey] : null; }
@@ -4360,19 +4385,15 @@ function tlHighlight(text, q){
   return escHtml(text.slice(0, idx)) + '<mark>' + escHtml(text.slice(idx, idx + q.length)) + '</mark>' + escHtml(text.slice(idx + q.length));
 }
 function tlOpenDexTools(anchor){
-  showTab('tools');
+  showTab('fx');
   var el = document.getElementById(anchor || 'tl-fx');
   if(el) setTimeout(function(){ el.scrollIntoView({ block: 'start' }); }, 30);
 }
 var dexToFxLink = document.getElementById('dexToFx');
 if(dexToFxLink) dexToFxLink.addEventListener('click', function(e){ e.preventDefault(); tlOpenDexTools('tl-fx'); });
-document.querySelectorAll('.tl-subnav a').forEach(function(a){
-  a.addEventListener('click', function(e){
-    e.preventDefault();
-    var id = (a.getAttribute('href') || '').slice(1);
-    var el = document.getElementById(id);
-    if(el) el.scrollIntoView({ block: 'start', behavior: 'smooth' });
-  });
+/* CD計算 ⇔ 調整ライン の相互移動ボタン（選択状態は tlCalc で共有され、そのまま引き継がれる） */
+document.querySelectorAll('[data-goto-tab]').forEach(function(b){
+  b.addEventListener('click', function(){ showTab(b.getAttribute('data-goto-tab')); });
 });
 
 /* --- 1. 効果の逆引き検索 --- */
