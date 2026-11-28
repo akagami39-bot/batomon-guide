@@ -43,10 +43,6 @@
   header.top h1{font-family:"DotGothic16",sans-serif;font-size:clamp(2rem,7vw,3.2rem);margin:0;letter-spacing:.04em;line-height:1.2;}
   header.top h1 .accent{color:var(--accent);}
   header.top p.sub{margin:.5rem auto 0;max-width:40rem;color:var(--ink2);font-weight:700;font-size:.92rem;}
-  .stats{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:1rem;}
-  .stat{background:var(--card);border:2px solid var(--line2);border-radius:8px;padding:.35rem .8rem;box-shadow:var(--shadow);font-weight:900;font-size:.85rem;}
-  .stat b{color:var(--accent);font-size:1.05rem;margin-right:.25rem;}
-
   /* 絞り込みバー：ボタンだけをタブナビの下に固定表示し、中身（.toolbar-body）はバー内のドロップダウンとして
      ボタンの真下に重ねて開く。中身を通常フロー（ページ最上部）に置くと、スクロール後に開いても画面外に出て
      見えなくなるため、必ずバーと一緒に移動する位置に置く。バーを #page-dex 直下に置くことで、sticky の効く
@@ -919,17 +915,6 @@
 <body>
 <header class="top">
   <h1>バトモン<span class="accent">図鑑</span></h1>
-  <div class="stats">
-    <span class="stat"><b>144</b>全種</span>
-    <span class="stat"><b>144</b>日本語名 確定</span>
-    <span class="stat"><b>144</b>ドット絵 あり</span>
-    <span class="stat"><b>24</b>トレーナー</span>
-    <span class="stat"><b>18</b>編成（Balance 28）</span>
-    <span class="stat"><b>12</b>アップデート履歴</span>
-    <span class="stat"><b>95</b>トリンケット</span>
-    <span class="stat"><b>54</b>アイテム</span>
-    <span class="stat"><b>47</b>用語</span>
-  </div>
 </header>
 <nav class="tabs" aria-label="セクション切り替え">
   <div class="tabs-in" role="tablist">
